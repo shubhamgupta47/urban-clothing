@@ -45,8 +45,12 @@ class SignIn extends Component {
             value={this.state.email}
             required
           />
-          <Button type="submit">Sign In</Button>
-          <Button onClick={signInWithGoogle}>Sign In With Google</Button>
+          <div className="buttons">
+            <Button type="submit">Sign In</Button>
+            <Button isGoogleSignIn onClick={signInWithGoogle}>
+              Sign In With Google
+            </Button>
+          </div>
         </form>
       </div>
     );
