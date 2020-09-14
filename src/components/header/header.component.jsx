@@ -18,8 +18,7 @@ const Header = ({ currentUser }) => {
           CONTACT
         </Link>
         {currentUser ? (
-          <a
-            href="#"
+          <button
             className="option"
             onClick={(e) => {
               e.preventDefault();
@@ -27,7 +26,7 @@ const Header = ({ currentUser }) => {
             }}
           >
             SIGN OUT
-          </a>
+          </button>
         ) : (
           <Link className="option" to="/signin">
             SIGN IN
