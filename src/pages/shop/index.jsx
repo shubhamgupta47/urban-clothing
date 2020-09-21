@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SHOP_DATA } from "../../data/shopping.data";
+import SHOP_DATA from "../../data/shopping.data";
 import "./shop.scss";
 import PreviewCollection from "../../components/preview-collection";
 
