@@ -10,7 +10,6 @@ import "./checkout.styles.scss";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 const CheckoutPage = ({ cartItems, totalPrice }) => {
-  console.log(totalPrice);
   return (
     <div className="checkout-page">
       <div className="checkout-header">
