@@ -10,11 +10,16 @@ import Homepage from "./pages/homepage";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument,
+  // addCollectionAndDocuments,
+} from "./firebase/firebase.utils";
 
 import { setCurrentUser } from "./redux/user/user.action";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
+// import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import "./App.css";
 
 class App extends Component {
@@ -63,6 +68,12 @@ class App extends Component {
       // this.setState({ currentUser: userAuth });
 
       setCurrentUser(userAuth);
+
+      //THIS WAS JUST TO ADD DATA TO FIRESTORE PROGRAMATICALLY
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   collectionArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
 
@@ -95,6 +106,7 @@ class App extends Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // collectionArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
