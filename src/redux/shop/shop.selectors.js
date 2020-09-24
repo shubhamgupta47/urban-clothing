@@ -19,4 +19,9 @@ export const selectCollectionCategory = (collectionUrlParam) => {
   );
 };
 
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  (shop) => shop.isFetching
+);
+
 export default selectCollections;
