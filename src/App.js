@@ -10,71 +10,17 @@ import Homepage from "./pages/homepage";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-import {
-  auth,
-  createUserProfileDocument,
-  // addCollectionAndDocuments,
-} from "./firebase/firebase.utils";
-
-import { setCurrentUser } from "./redux/user/user.action";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-// import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import "./App.css";
+import { checkUserSession } from "./redux/user/user.action";
 
 class App extends Component {
-  /**
-   * Commented since we are now using redux
-   */
-  // constructor() {
-  //   super();
-  //   // Store user's sign-in status here
-  //   this.state = {
-  //     currentUser: null,
-  //   };
-  // }
-
   unsubscribeFromAuth = null; // To close the subscription to prevent memory leaks
 
   componentDidMount() {
-    /**
-     * This is an Open subscription: open msging system b/w our app & firebase.
-     *
-     * On occurance of any change at the Firebase from any src related to this
-     * application, Firebase sends an info that status changed, e.g Sign In or
-     * Sign out
-     * */
-    const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-          /**
-           * Commented since we are now using redux
-           */
-          // this.setState({
-          //   currentUser: {
-          //     id: snapShot.id,
-          //     ...snapShot.data(),
-          //   },
-          // });
-        });
-      }
-      // this.setState({ currentUser: userAuth });
-
-      setCurrentUser(userAuth);
-
-      //THIS WAS JUST TO ADD DATA TO FIRESTORE PROGRAMATICALLY
-      // addCollectionAndDocuments(
-      //   "collections",
-      //   collectionArray.map(({ title, items }) => ({ title, items }))
-      // );
-    });
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -110,7 +56,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
